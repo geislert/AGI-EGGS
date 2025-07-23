@@ -1,2 +1,3 @@
 # AGI-EGGS
-Framework that use Unified Universal Language Protocol to Process information that centers on fact through math and psychology
+A framework that uses the Unified Universal Language Protocol to process
+information centered on facts through mathematics and psychology.
