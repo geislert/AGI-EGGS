@@ -85,3 +85,16 @@ You should see output similar to:
 ```
 
 This demonstrates simple information flow among multiple devices.
+
+## Civil liberties simulation
+
+`civil_liberties_simulation.py` starts three nodes that model a citizen, local
+law enforcement and a news outlet. The script demonstrates how messages can be
+exchanged and how a simple threat matrix might track constitutional and civil
+liberties issues.
+
+Run it with:
+
+```bash
+python3 civil_liberties_simulation.py
+```
