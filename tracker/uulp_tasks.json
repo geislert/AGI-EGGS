@@ -1,0 +1,76 @@
+{
+    "tasks": [
+        {
+            "id": "T001",
+            "priority": 1,
+            "status": "done",
+            "description": "Fix and expand README"
+        },
+        {
+            "id": "T002",
+            "priority": 2,
+            "status": "open",
+            "description": "Add automated tests using pytest"
+        },
+        {
+            "id": "T003",
+            "priority": 3,
+            "status": "open",
+            "description": "Add packaging configuration (pyproject.toml)"
+        },
+        {
+            "id": "T004",
+            "priority": 4,
+            "status": "open",
+            "description": "Set up CI workflow"
+        },
+        {
+            "id": "T005",
+            "priority": 5,
+            "status": "done",
+            "description": "Enhance example scripts"
+        },
+        {
+            "id": "T006",
+            "priority": 6,
+            "status": "done",
+            "description": "Document modules and add Phoenix Project summary"
+        },
+        {
+            "id": "T007",
+            "priority": 7,
+            "status": "open",
+            "description": "Build internal UULP interpreter for module communication"
+        },
+        {
+            "id": "T008",
+            "priority": 8,
+            "status": "done",
+            "description": "Add prototype modules from Project Fulcrum"
+        },
+        {
+            "id": "T009",
+            "priority": 9,
+            "status": "done",
+            "description": "Implement resilience utilities"
+        },
+        {
+            "id": "T010",
+            "priority": 10,
+            "status": "in_progress",
+            "description": "Add emergency alert webhook system"
+        },
+        {
+            "id": "T011",
+            "priority": 11,
+            "status": "open",
+            "description": "Plan mobile app integration"
+        }
+        ,{
+            "id": "T012",
+            "priority": 12,
+            "status": "open",
+            "description": "Implement life_support module with triage and alerts"
+        }
+    ]
+}

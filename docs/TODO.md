@@ -1,0 +1,85 @@
+# AGI-EGGS Project Tracker
+
+This file tracks ongoing tasks and notes for improving the repository. It is
+maintained by the Codex agent and can store temporary data or references for
+future work.
+
+## Prioritized TODO List (July 2025)
+
+1. **Fix and expand README** (done)
+   - Completed with new feature list, installation instructions and example output.
+   - Follow-up tasks: add architecture diagram, screenshots and CONTRIBUTING guidelines.
+
+2. **Add automated tests**
+   - Create a `tests/` directory using `pytest`.
+   - Tests should cover starting nodes, sending/receiving messages and
+     persisting queued messages.
+
+3. **Package configuration**
+   - Provide a `pyproject.toml` or `setup.py` for pip installation.
+   - Specify minimal dependencies.
+
+4. **Continuous Integration**
+   - Add a CI workflow (e.g. GitHub Actions) running the test suite.
+   - Optionally include linting.
+
+5. **Enhance example scripts** (done)
+   - Updated `example.py` with detailed logging, persistence and graceful
+     shutdown handling. Repetitive setup logic consolidated.
+
+6. **Build UULP interpreter**
+   - Design an internal interpreter allowing modules to communicate using
+     UULP-formatted messages for higher accuracy and speed.
+
+7. **Document additional modules** (done)
+   - Explained `modules/psych_support.py` and prototype features in README.
+
+8. **Add Phoenix Project documentation** (done)
+   - Added summary doc and implemented placeholder modules.
+
+9. **Prototype modules from Project Fulcrum** (done)
+   - Added ACA, UULP encoder, quantum security, AI wrapper, trauma detector,
+     edge node and governance utilities.
+
+11. **Add resilience utilities** (done)
+   - Implemented geospatial triage, self-healing provenance, search agent,
+     self-updater, offline sync and related helpers.
+
+12. **Emergency alert webhook system** (in progress)
+   - Provide a function `emergency_webhook` to dispatch urgent alerts to chat services.
+   - Integrate with mock threat data for now.
+
+10. **Future features**
+   - Encryption/authentication for network connections.
+   - Command-line option for message store paths.
+   - Tutorial/walkthrough.
+
+---
+
+Additional documentation, such as research into historical influences or other
+context, can be kept in the `docs/` directory as needed.
+
+## Condensed Tracking (UULP)
+A simplified machine-readable task list is stored in `tracker/uulp_tasks.json`. Each entry includes an id, priority, status, and description to facilitate automated updates.
+
+13. **Mobile app integration**
+   - Draft cross-platform architecture using Flutter.
+   - Support offline mesh networking with Bluetooth/WiFi Direct.
+   - Progressive capability modes for low-end devices.
+
+
+## Life-Saving Priority Improvements
+The following features are proposed to enhance AGI‑EGGS for immediate crisis response. They are tracked for future development.
+
+1. **Automated Triage Protocol** – On-device AI categorizing emergency reports.
+2. **Blood Supply Network Integration** – Connect to regional blood banks and alert donors.
+3. **Collapsed Structure Detection** – Analyze building photos for survivable void spaces.
+4. **Epidemic Early Warning System** – Spot unusual symptom clusters.
+5. **Emergency Blood Circulation AI** – Guide users through CPR and tourniquet steps offline.
+6. **Refugee Family Reunification** – Privacy-preserving matching across shelters.
+7. **Predictive Evacuation Modeling** – Combine terrain and crowd data for safe routing.
+8. **Emergency Supply Blockchain** – Tamper-proof tracking of critical resources.
+9. **Disaster-Specific First Response Protocols** – Dynamic checklists by incident type.
+10. **Autonomous Drone Integration** – Deliver medical gear and provide thermal imaging.
+
+These items remain open until base infrastructure (testing, packaging, CI) is in place.
