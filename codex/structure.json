@@ -1,0 +1,15 @@
+{
+  "directories": {
+    "agi_eggs": "Core networking modules and advanced prototypes",
+    "modules": "Additional utility modules",
+    "docs": "Documentation and planning notes",
+    "tracker": "Machine-readable task lists and history",
+    "codex": "Agent-specific notes and temporary context",
+    "tests": "Pytest-based test suite"
+  },
+  "key_files": [
+    "README.md",
+    "pyproject.toml",
+    "example.py"
+  ]
+}
