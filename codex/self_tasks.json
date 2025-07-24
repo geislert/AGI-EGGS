@@ -1,0 +1,40 @@
+{
+  "tasks": [
+    {
+      "id": "ST001",
+      "priority": 1,
+      "status": "done",
+      "description": "Create self-tracking task file for Codex"
+    },
+    {
+      "id": "ST002",
+      "priority": 2,
+      "status": "in_progress",
+      "description": "Maintain updated summary of outstanding improvements"
+    },
+    {
+      "id": "ST003",
+      "priority": 3,
+      "status": "open",
+      "description": "Ensure instructions enable repository rebuild"
+    },
+    {
+      "id": "ST004",
+      "priority": 4,
+      "status": "open",
+      "description": "Maintain structure.json log"
+    },
+    {
+      "id": "ST005",
+      "priority": 5,
+      "status": "in_progress",
+      "description": "Record structure history for each commit"
+    }
+    ,{
+      "id": "ST006",
+      "priority": 6,
+      "status": "open",
+      "description": "Store agent state in agent_state.json"
+    }
+  ]
+}
