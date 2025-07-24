@@ -1,0 +1,7 @@
+{
+  "tasks": [
+    {"id": "ST001", "priority": 1, "status": "done", "description": "Create self-tracking task file for Codex"},
+    {"id": "ST002", "priority": 2, "status": "in_progress", "description": "Maintain updated summary of outstanding improvements"},
+    {"id": "ST003", "priority": 3, "status": "open", "description": "Ensure instructions enable repository rebuild"}
+  ]
+}
