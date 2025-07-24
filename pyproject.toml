@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agi-eggs"
+version = "0.1.0"
+authors = [{name="AGI-EGGS Team"}]
+description = "Asynchronous Gateway Interface - Experimental Grid System"
+readme = "README.md"
+license = "GPL-3.0-or-later"
+requires-python = ">=3.8"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["agi_eggs*", "modules*", "tracker*"]
+
+[project.optional-dependencies]
+test = ["pytest", "pytest-asyncio", "cryptography"]
