@@ -1,0 +1,21 @@
+{
+  "directories": {
+    "tests": "dir",
+    "modules": "dir",
+    "tracker": "dir",
+    "docs": "dir",
+    "codex": "dir",
+    "agi_eggs": "dir"
+  },
+  "key_files": [
+    "pyproject.toml",
+    "Usc10Sec253",
+    "README.md",
+    "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+    "mesh_example.py",
+    "example.py",
+    "civil_liberties_simulation.py",
+    "frontend.py",
+    "LICENSE"
+  ]
+}
