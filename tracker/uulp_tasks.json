@@ -1,0 +1,190 @@
+{
+    "tasks": [
+        {
+            "id": "T001",
+            "priority": 1,
+            "status": "done",
+            "description": "Fix and expand README"
+        },
+        {
+            "id": "T002",
+            "priority": 2,
+            "status": "open",
+            "description": "Add automated tests using pytest"
+        },
+        {
+            "id": "T003",
+            "priority": 3,
+            "status": "open",
+            "description": "Add packaging configuration (pyproject.toml)"
+        },
+        {
+            "id": "T004",
+            "priority": 4,
+            "status": "open",
+            "description": "Set up CI workflow"
+        },
+        {
+            "id": "T005",
+            "priority": 5,
+            "status": "done",
+            "description": "Enhance example scripts"
+        },
+        {
+            "id": "T006",
+            "priority": 6,
+            "status": "done",
+            "description": "Document modules and add Phoenix Project summary"
+        },
+        {
+            "id": "T007",
+            "priority": 7,
+            "status": "open",
+            "description": "Build internal UULP interpreter for module communication"
+        },
+        {
+            "id": "T008",
+            "priority": 8,
+            "status": "done",
+            "description": "Add prototype modules from Project Fulcrum"
+        },
+        {
+            "id": "T009",
+            "priority": 9,
+            "status": "done",
+            "description": "Implement resilience utilities"
+        },
+        {
+            "id": "T010",
+            "priority": 10,
+            "status": "in_progress",
+            "description": "Add emergency alert webhook system"
+        },
+        {
+            "id": "T011",
+            "priority": 11,
+            "status": "open",
+            "description": "Plan mobile app integration"
+        },
+        {
+            "id": "T012",
+            "priority": 12,
+            "status": "open",
+            "description": "Implement life_support module with triage and alerts"
+        },
+        {
+            "id": "T013",
+            "priority": 13,
+            "status": "done",
+            "description": "Document low-cost communication system plan"
+        },
+        {
+            "id": "T014",
+            "priority": 14,
+            "status": "open",
+            "description": "Prototype AI-managed mesh communication hardware"
+        },
+        {
+            "id": "T015",
+            "priority": 15,
+            "status": "open",
+            "description": "Implement Adaptive Spectrum Intelligence Module"
+        },
+        {
+            "id": "T016",
+            "priority": 16,
+            "status": "open",
+            "description": "Add neural model hot-swapping based on resources"
+        },
+        {
+            "id": "T017",
+            "priority": 17,
+            "status": "open",
+            "description": "Create HF autotuning system"
+        },
+        {
+            "id": "T018",
+            "priority": 18,
+            "status": "open",
+            "description": "Implement cryptographic identity rotation"
+        },
+        {
+            "id": "T019",
+            "priority": 19,
+            "status": "open",
+            "description": "Develop disaster-powered charging management"
+        },
+        {
+            "id": "T020",
+            "priority": 20,
+            "status": "open",
+            "description": "AI-enhanced signal processing utilities"
+        },
+        {
+            "id": "T021",
+            "priority": 21,
+            "status": "open",
+            "description": "Automated infrastructure mapping"
+        },
+        {
+            "id": "T022",
+            "priority": 22,
+            "status": "open",
+            "description": "Cross-mode bridging protocol"
+        },
+        {
+            "id": "T023",
+            "priority": 23,
+            "status": "open",
+            "description": "Resilient time synchronization"
+        },
+        {
+            "id": "T024",
+            "priority": 24,
+            "status": "open",
+            "description": "Self-healing network fabric"
+        },
+        {
+            "id": "T025",
+            "priority": 25,
+            "status": "done",
+            "description": "Document humanitarian integration strategy"
+        },
+        {
+            "id": "T026",
+            "priority": 26,
+            "status": "open",
+            "description": "Build consent and sovereignty engine"
+        },
+        {
+            "id": "T027",
+            "priority": 27,
+            "status": "open",
+            "description": "Implement offline-first sync layer"
+        },
+        {
+            "id": "T028",
+            "priority": 28,
+            "status": "open",
+            "description": "Add multilingual intake pipeline"
+        },
+        {
+            "id": "T029",
+            "priority": 29,
+            "status": "open",
+            "description": "Create private sector hooks"
+        },
+        {
+            "id": "T030",
+            "priority": 30,
+            "status": "open",
+            "description": "Build community-led interfaces"
+        },
+        {
+            "id": "T031",
+            "priority": 31,
+            "status": "open",
+            "description": "Develop zero-trust security for humanitarian data"
+        }
+    ]
+}
