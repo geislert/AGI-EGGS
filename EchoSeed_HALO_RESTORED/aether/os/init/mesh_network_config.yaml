@@ -1,0 +1,55 @@
+# aether/os/init/mesh_network_config.yaml
+# EchoSeed HALO Mesh Network Default Configuration
+# This file defines the default parameters for the local mesh network,
+# used when no external network is available or for covert operations.
+
+mesh_id: HALO-Net-001
+# Unique identifier for this mesh network instance.
+# Can be dynamically generated or configured during deployment.
+
+protocols:
+  - esp-now
+  # ESP-NOW for fast, short-range, connectionless communication between ESP32 devices.
+  - lora-433
+  # LoRa (Long Range) for wide-area, low-power communication on 433 MHz band.
+  - wifi-direct
+  # Wi-Fi Direct for peer-to-peer connections without an access point.
+
+roles:
+  - sentinel
+  # Environmental awareness and event monitoring node.
+  - coord
+  # Coordinates routing and enforces fallback quorum.
+  - hub
+  # Fallback app sync and software caching.
+  - survivor
+  # Human-controlled device broadcasting status or need.
+  - pet_repeater
+  # Animal-wearable node extending mesh range and relaying commands.
+
+encryption: AES-256
+# Symmetric encryption standard for all mesh communications.
+# Key management is handled by the Secure Element (TPM/HSM).
+
+frequency_hopping_enabled: true
+# Enables Frequency Hopping Spread Spectrum (FHSS) for anti-jamming resilience.
+# Specific FHSS patterns are managed by the SDR module.
+
+power_management_profile: ultra_low_power
+# Default power profile to maximize battery life in offline mode.
+# Can switch to 'balanced' or 'performance' based on task.
+
+beacon_interval_sec: 300
+# Interval (in seconds) for "I Am Still Alive" (IASA) beacon broadcasts.
+# Set to 5 minutes by default to conserve power.
+
+max_hops: 10
+# Maximum number of hops a packet can traverse in the mesh network.
+
+qos_levels:
+  critical: 0
+  # Highest priority for emergency/triage messages.
+  normal: 1
+  # Standard data transfer.
+  background: 2
+  # Cultural archive sync, non-urgent data.

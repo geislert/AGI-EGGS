@@ -4,6 +4,7 @@
 from .node import Node, PiNode, EggNode, Message
 from .network import Network
 from .persistence import MessageStore
+from .notifications import NotificationService
 
 __all__ = [
     'Node',
@@ -12,4 +13,5 @@ __all__ = [
     'Message',
     'Network',
     'MessageStore',
+    'NotificationService',
 ]
