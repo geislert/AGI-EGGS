@@ -1,0 +1,6 @@
+{
+  "tasks": [
+    {"id":"UC001","p":1,"s":"done","d":"Init compact task log"},
+    {"id":"UC002","p":2,"s":"open","d":"Track structure history growth"}
+  ]
+}
