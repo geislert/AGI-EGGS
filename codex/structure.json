@@ -1,0 +1,24 @@
+{
+  "directories": {
+    "agi_eggs": "dir",
+    "tracker": "dir",
+    "codex": "dir",
+    "tests": "dir",
+    "modules": "dir",
+    "agi_eggs.egg-info": "dir",
+    "docs": "dir"
+  },
+  "key_files": [
+    "LICENSE",
+    "example.py",
+    "civil_liberties_simulation.py",
+    "mesh_example.py",
+    "laser_control.py",
+    "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+    "frontend.py",
+    ".gitignore",
+    "README.md",
+    "Usc10Sec253",
+    "pyproject.toml"
+  ]
+}

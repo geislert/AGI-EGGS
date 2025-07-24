@@ -1,0 +1,575 @@
+[
+  {
+    "timestamp": "2025-07-24T04:13:49.866951",
+    "snapshot": {
+      "directories": {
+        "tests": "dir",
+        "modules": "dir",
+        "tracker": "dir",
+        "docs": "dir",
+        "codex": "dir",
+        "agi_eggs": "dir"
+      },
+      "key_files": [
+        "pyproject.toml",
+        "Usc10Sec253",
+        "README.md",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        "mesh_example.py",
+        "example.py",
+        "civil_liberties_simulation.py",
+        "frontend.py",
+        "LICENSE"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T04:14:16.147179",
+    "snapshot": {
+      "directories": {
+        "tests": "dir",
+        "modules": "dir",
+        "tracker": "dir",
+        "docs": "dir",
+        "codex": "dir",
+        "agi_eggs": "dir"
+      },
+      "key_files": [
+        "pyproject.toml",
+        "Usc10Sec253",
+        "README.md",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        "mesh_example.py",
+        "example.py",
+        "civil_liberties_simulation.py",
+        "frontend.py",
+        "LICENSE"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T04:36:18.079871",
+    "snapshot": {
+      "directories": {
+        "modules": "dir",
+        "tracker": "dir",
+        "docs": "dir",
+        "agi_eggs": "dir",
+        "codex": "dir",
+        "tests": "dir"
+      },
+      "key_files": [
+        "Usc10Sec253",
+        "mesh_example.py",
+        "pyproject.toml",
+        "example.py",
+        "README.md",
+        "frontend.py",
+        "LICENSE",
+        "civil_liberties_simulation.py",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T04:37:18.499973",
+    "snapshot": {
+      "directories": {
+        "modules": "dir",
+        "tracker": "dir",
+        "docs": "dir",
+        "agi_eggs": "dir",
+        "codex": "dir",
+        "tests": "dir"
+      },
+      "key_files": [
+        "Usc10Sec253",
+        "mesh_example.py",
+        "pyproject.toml",
+        "example.py",
+        "README.md",
+        "frontend.py",
+        "LICENSE",
+        "civil_liberties_simulation.py",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T04:51:15.789139",
+    "snapshot": {
+      "directories": {
+        "modules": "dir",
+        "tracker": "dir",
+        "agi_eggs": "dir",
+        "tests": "dir",
+        "codex": "dir",
+        "docs": "dir"
+      },
+      "key_files": [
+        "pyproject.toml",
+        "LICENSE",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        "Usc10Sec253",
+        "README.md",
+        "example.py",
+        "mesh_example.py",
+        "frontend.py",
+        "civil_liberties_simulation.py"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T05:23:32.797996",
+    "snapshot": {
+      "directories": {
+        "agi_eggs": "dir",
+        "docs": "dir",
+        "codex": "dir",
+        "tests": "dir",
+        "modules": "dir",
+        "tracker": "dir"
+      },
+      "key_files": [
+        "LICENSE",
+        "README.md",
+        "Usc10Sec253",
+        "example.py",
+        "mesh_example.py",
+        "frontend.py",
+        "civil_liberties_simulation.py",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        "pyproject.toml"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T05:34:21.651645",
+    "snapshot": {
+      "directories": {
+        "codex": "dir",
+        "tests": "dir",
+        "docs": "dir",
+        "tracker": "dir",
+        "agi_eggs": "dir",
+        "modules": "dir"
+      },
+      "key_files": [
+        "frontend.py",
+        "mesh_example.py",
+        "pyproject.toml",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        "Usc10Sec253",
+        "civil_liberties_simulation.py",
+        "README.md",
+        "LICENSE",
+        "example.py"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T05:53:02.195242",
+    "snapshot": {
+      "directories": {
+        "tests": "dir",
+        "agi_eggs": "dir",
+        "codex": "dir",
+        "agi_eggs.egg-info": "dir",
+        "docs": "dir",
+        "modules": "dir",
+        "tracker": "dir"
+      },
+      "key_files": [
+        "LICENSE",
+        "mesh_example.py",
+        "pyproject.toml",
+        "example.py",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        "civil_liberties_simulation.py",
+        "frontend.py",
+        "Usc10Sec253",
+        "README.md"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T11:35:29.229551",
+    "snapshot": {
+      "directories": {
+        "codex": "dir",
+        "tests": "dir",
+        "agi_eggs": "dir",
+        "tracker": "dir",
+        "modules": "dir",
+        "docs": "dir"
+      },
+      "key_files": [
+        "README.md",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        "Usc10Sec253",
+        "civil_liberties_simulation.py",
+        "frontend.py",
+        "pyproject.toml",
+        "LICENSE",
+        "mesh_example.py",
+        "example.py"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T12:20:55.448203",
+    "snapshot": {
+      "directories": {
+        "codex": "dir",
+        "agi_eggs": "dir",
+        "modules": "dir",
+        "tracker": "dir",
+        "tests": "dir",
+        "docs": "dir"
+      },
+      "key_files": [
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        "example.py",
+        "frontend.py",
+        "Usc10Sec253",
+        "LICENSE",
+        "README.md",
+        "mesh_example.py",
+        "pyproject.toml",
+        "civil_liberties_simulation.py"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T12:35:41.363217",
+    "snapshot": {
+      "directories": {
+        "codex": "dir",
+        "agi_eggs": "dir",
+        "modules": "dir",
+        "docs": "dir",
+        "tracker": "dir",
+        "tests": "dir",
+        "agi_eggs.egg-info": "dir"
+      },
+      "key_files": [
+        "example.py",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        "pyproject.toml",
+        "frontend.py",
+        "Usc10Sec253",
+        "README.md",
+        "civil_liberties_simulation.py",
+        ".gitignore",
+        "mesh_example.py",
+        "LICENSE"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T12:43:29.075361",
+    "snapshot": {
+      "directories": {
+        "codex": "dir",
+        "docs": "dir",
+        "modules": "dir",
+        "agi_eggs": "dir",
+        "tracker": "dir",
+        "tests": "dir"
+      },
+      "key_files": [
+        "pyproject.toml",
+        "frontend.py",
+        "README.md",
+        "mesh_example.py",
+        "Usc10Sec253",
+        "LICENSE",
+        "example.py",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        ".gitignore",
+        "civil_liberties_simulation.py"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T13:06:38.937626",
+    "snapshot": {
+      "directories": {
+        "tests": "dir",
+        "docs": "dir",
+        "modules": "dir",
+        "tracker": "dir",
+        "agi_eggs": "dir",
+        "codex": "dir"
+      },
+      "key_files": [
+        "LICENSE",
+        "frontend.py",
+        "civil_liberties_simulation.py",
+        "Usc10Sec253",
+        "mesh_example.py",
+        "pyproject.toml",
+        "example.py",
+        "README.md",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        ".gitignore"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T13:06:43.096023",
+    "snapshot": {
+      "directories": {
+        "tests": "dir",
+        "docs": "dir",
+        "modules": "dir",
+        "tracker": "dir",
+        "agi_eggs": "dir",
+        "codex": "dir"
+      },
+      "key_files": [
+        "LICENSE",
+        "frontend.py",
+        "civil_liberties_simulation.py",
+        "Usc10Sec253",
+        "mesh_example.py",
+        "pyproject.toml",
+        "example.py",
+        "README.md",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        ".gitignore"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T13:30:22.624944",
+    "snapshot": {
+      "directories": {
+        "tracker": "dir",
+        "modules": "dir",
+        "codex": "dir",
+        "docs": "dir",
+        "agi_eggs": "dir",
+        "tests": "dir"
+      },
+      "key_files": [
+        "pyproject.toml",
+        "mesh_example.py",
+        "README.md",
+        ".gitignore",
+        "LICENSE",
+        "example.py",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        "civil_liberties_simulation.py",
+        "Usc10Sec253",
+        "frontend.py"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T13:57:36.473073",
+    "snapshot": {
+      "directories": {
+        "docs": "dir",
+        "agi_eggs.egg-info": "dir",
+        "tests": "dir",
+        "tracker": "dir",
+        "agi_eggs": "dir",
+        "codex": "dir",
+        "modules": "dir"
+      },
+      "key_files": [
+        "frontend.py",
+        "pyproject.toml",
+        "Usc10Sec253",
+        "mesh_example.py",
+        "LICENSE",
+        "example.py",
+        "README.md",
+        ".gitignore",
+        "civil_liberties_simulation.py",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T13:58:16.781104",
+    "snapshot": {
+      "directories": {
+        "docs": "dir",
+        "agi_eggs.egg-info": "dir",
+        "tests": "dir",
+        "tracker": "dir",
+        "agi_eggs": "dir",
+        "codex": "dir",
+        "modules": "dir"
+      },
+      "key_files": [
+        "frontend.py",
+        "pyproject.toml",
+        "Usc10Sec253",
+        "mesh_example.py",
+        "LICENSE",
+        "example.py",
+        "README.md",
+        ".gitignore",
+        "civil_liberties_simulation.py",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T14:13:57.155889",
+    "snapshot": {
+      "directories": {
+        "docs": "dir",
+        "codex": "dir",
+        "tests": "dir",
+        "modules": "dir",
+        "agi_eggs": "dir",
+        "tracker": "dir"
+      },
+      "key_files": [
+        ".gitignore",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        "pyproject.toml",
+        "example.py",
+        "frontend.py",
+        "README.md",
+        "mesh_example.py",
+        "civil_liberties_simulation.py",
+        "Usc10Sec253",
+        "LICENSE"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T14:51:52.633801",
+    "snapshot": {
+      "directories": {
+        "agi_eggs": "dir",
+        "modules": "dir",
+        "docs": "dir",
+        "tests": "dir",
+        "codex": "dir",
+        "tracker": "dir"
+      },
+      "key_files": [
+        "README.md",
+        "mesh_example.py",
+        ".gitignore",
+        "example.py",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        "frontend.py",
+        "Usc10Sec253",
+        "civil_liberties_simulation.py",
+        "pyproject.toml",
+        "LICENSE"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T14:52:21.417866",
+    "snapshot": {
+      "directories": {
+        "agi_eggs": "dir",
+        "modules": "dir",
+        "docs": "dir",
+        "tests": "dir",
+        "codex": "dir",
+        "tracker": "dir"
+      },
+      "key_files": [
+        "README.md",
+        "mesh_example.py",
+        ".gitignore",
+        "example.py",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        "frontend.py",
+        "Usc10Sec253",
+        "civil_liberties_simulation.py",
+        "pyproject.toml",
+        "LICENSE"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T15:00:11.434983",
+    "snapshot": {
+      "directories": {
+        "tracker": "dir",
+        "agi_eggs.egg-info": "dir",
+        "codex": "dir",
+        "modules": "dir",
+        "agi_eggs": "dir",
+        "docs": "dir",
+        "tests": "dir"
+      },
+      "key_files": [
+        "example.py",
+        "LICENSE",
+        "civil_liberties_simulation.py",
+        "frontend.py",
+        "mesh_example.py",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        "pyproject.toml",
+        "Usc10Sec253",
+        ".gitignore",
+        "README.md"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T18:13:09.818769",
+    "snapshot": {
+      "directories": {
+        "docs": "dir",
+        "tests": "dir",
+        "agi_eggs": "dir",
+        "modules": "dir",
+        "codex": "dir",
+        "tracker": "dir"
+      },
+      "key_files": [
+        "frontend.py",
+        "example.py",
+        "laser_control.py",
+        "mesh_example.py",
+        "README.md",
+        "Usc10Sec253",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        "LICENSE",
+        ".gitignore",
+        "civil_liberties_simulation.py",
+        "pyproject.toml"
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-07-24T19:01:37.855481",
+    "snapshot": {
+      "directories": {
+        "agi_eggs": "dir",
+        "tracker": "dir",
+        "codex": "dir",
+        "tests": "dir",
+        "modules": "dir",
+        "agi_eggs.egg-info": "dir",
+        "docs": "dir"
+      },
+      "key_files": [
+        "LICENSE",
+        "example.py",
+        "civil_liberties_simulation.py",
+        "mesh_example.py",
+        "laser_control.py",
+        "Plasma Fusion control for quantum computing and as a solution for data, power storage and energy",
+        "frontend.py",
+        ".gitignore",
+        "README.md",
+        "Usc10Sec253",
+        "pyproject.toml"
+      ]
+    }
+  }
+]
