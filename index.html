@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGI-EGG Command Post v3.7 (HTML/JS)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #111827;
+            color: #d1d5db;
+        }
+        .tab-button {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .tab-button.active {
+            border-color: #3b82f6;
+            color: white;
+            background-color: #1f2937;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .priority-briefing {
+            border-left: 4px solid #F97316; /* Orange border for priority */
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <div class="container mx-auto p-4 max-w-screen-2xl">
+        <div id="notification-bar" class="hidden bg-green-600 text-white p-2 text-center rounded-b-lg mb-2"></div>
+        <header class="mb-6 text-center">
+            <h1 class="text-3xl font-bold text-white">🛡️ AGI-EGG Operational Command System</h1>
+            <p class="text-gray-400">v3.7 (Hardened Feeds) - Unified Knowledge, SIGINT, RSS & Vehicle-Ethics Platform</p>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Left Column - Controls -->
+            <div class="lg:col-span-3 space-y-6">
+                <!-- Status Panel -->
+                <div id="status-panel" class="bg-gray-800 p-4 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-semibold text-white mb-3">System Status</h2>
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <p class="text-sm text-gray-400">W-Metric</p>
+                            <p id="w-metric" class="text-2xl font-bold text-blue-400">0.0000</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400">Violations</p>
+                            <p id="violations-metric" class="text-2xl font-bold text-red-500">0</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400">Audit</p>
+                            <p id="audit-status-metric" class="text-lg font-bold text-green-500">PASS</p>
+                        </div>
+                    </div>
+                    <div id="w-metric-sparkline" class="mt-4 h-20"></div>
+                </div>
+
+                <!-- Control Tabs -->
+                <div class="bg-gray-800 rounded-lg shadow-lg">
+                    <div class="flex flex-col">
+                        <button class="tab-button text-left p-4 font-semibold active" data-tab="ingest">📥 Manual Ingest</button>
+                        <button class="tab-button text-left p-4 font-semibold" data-tab="analysis">🔬 Oversight</button>
+                        <button class="tab-button text-left p-4 font-semibold" data-tab="viz">📈 Visualization</button>
+                    </div>
+                    <div class="p-4 border-t border-gray-700">
+                        <!-- Ingest Tab -->
+                        <div id="ingest-tab" class="tab-content active space-y-4">
+                            <h3 class="text-lg font-semibold text-white">File Ingestion</h3>
+                            <div>
+                                <label for="source-type-select" class="block text-sm font-medium text-gray-300 mb-1">Source Type</label>
+                                <select id="source-type-select" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 text-white focus:ring-blue-500 focus:border-blue-500"></select>
+                            </div>
+                            <div>
+                                <label for="file-upload" class="block text-sm font-medium text-gray-300 mb-1">Upload Document</label>
+                                <input id="file-upload" type="file" class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700"/>
+                            </div>
+                            <button id="ingest-button" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">Ingest Document</button>
+                            <hr class="border-gray-600 my-4">
+                            <h3 class="text-lg font-semibold text-white">SIGINT Processing</h3>
+                             <div>
+                                <label for="sigint-data" class="block text-sm font-medium text-gray-300 mb-1">Signal Data (JSON)</label>
+                                <textarea id="sigint-data" rows="3" class="w-full bg-gray-700 border border-gray-600 rounded-md p-2 text-white font-mono text-sm" placeholder='{"source": "field-op", "payload": "Test signal"}'></textarea>
+                            </div>
+                            <button id="process-signal-button" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">Process Signal</button>
+                        </div>
+                        <!-- Analysis Tab -->
+                        <div id="analysis-tab" class="tab-content space-y-4">
+                            <h3 class="text-lg font-semibold text-white">System Analysis & Oversight</h3>
+                            <div id="analysis-summary" class="text-gray-400 max-h-96 overflow-y-auto">Run RSS Ingestion to populate analysis.</div>
+                        </div>
+                        <!-- Visualization Tab -->
+                         <div id="viz-tab" class="tab-content">
+                            <h3 class="text-lg font-semibold text-white">Centrifugal Knowledge</h3>
+                            <div id="radial-plot" class="w-full h-96"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Live Feed -->
+            <div class="lg:col-span-9 space-y-6">
+                <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-2">
+                        <h2 class="text-2xl font-bold text-white">Live Intelligence Feed</h2>
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 w-full md:w-auto">
+                            <select id="feed-select" multiple class="bg-gray-700 border border-gray-600 rounded-md p-1 text-sm text-white md:min-w-[200px]"></select>
+                            <input id="email-input" type="email" placeholder="Email" class="bg-gray-700 border border-gray-600 rounded-md p-1 text-sm text-white md:min-w-[160px]" />
+                            <button id="ingest-rss-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md flex items-center justify-center">
+                                <span class="button-text">Refresh Feeds</span>
+                                <div class="loader hidden ml-2"></div>
+                            </button>
+                        </div>
+                    </div>
+                    </div>
+                    <div id="live-feed-container" class="space-y-6 max-h-[80vh] overflow-y-auto p-2">
+                        <!-- Source Status -->
+                        <div>
+                             <h3 class="text-xl font-semibold text-gray-400 mb-3 sticky top-0 bg-gray-800 py-2">
+                                <i class="fa-solid fa-tower-broadcast mr-2"></i>Source Status
+                            </h3>
+                            <div id="source-status-panel" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 text-sm">
+                                <!-- Status items will be injected here -->
+                            </div>
+                        </div>
+                        <hr class="border-gray-700">
+                        <!-- Priority Briefings -->
+                        <div>
+                            <h3 class="text-xl font-semibold text-orange-400 mb-3 sticky top-0 bg-gray-800 py-2">
+                                <i class="fa-solid fa-star mr-2"></i>Priority Briefings
+                            </h3>
+                            <div id="priority-briefings" class="space-y-4">
+                                <p class="text-gray-500">Awaiting analysis...</p>
+                            </div>
+                        </div>
+                        <hr class="border-gray-700">
+                        <!-- Latest Intelligence -->
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-400 mb-3 sticky top-0 bg-gray-800 py-2">
+                               <i class="fa-solid fa-satellite-dish mr-2"></i>Latest Intelligence
+                            </h3>
+                            <div id="latest-intelligence" class="space-y-4">
+                               <p class="text-gray-500">Awaiting feed ingestion...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Toast Notification -->
+        <div id="toast" class="fixed bottom-5 right-5 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300">
+            <p id="toast-message"></p>
+        </div>
+    </div>
+
+    <script type="module">
+        // --- CONFIGURATION ---
+        const CONFIG = {
+            knowledge_bands: {
+                "Core":   { threshold: 0.85, radius: 1.0, color: "#EF4444" },
+                "Inner":  { threshold: 0.7,  radius: 2.0, color: "#F97316" },
+                "Middle": { threshold: 0.5,  radius: 3.0, color: "#FACC15" },
+                "Outer":  { threshold: 0.3,  radius: 4.0, color: "#4ADE80" },
+                "Fringe": { threshold: 0.0,  radius: 5.0, color: "#9CA3AF" }
+            },
+            source_trust: {
+                "peer_reviewed": 1.25, "sigint_decrypted": 1.25, "sensor_telemetry": 1.15,
+                "field_report": 1.00, "user_upload": 1.0,
+                "Law & Policy": 1.2, "Science & Tech": 1.15, "Psychology & Ethics": 1.1
+            },
+            // Updated RSS feeds for better reliability
+            rss_feeds: {
+                "Law & Policy": [
+                    "https://www.eff.org/rss/updates.xml",
+                    "https://feeds.reuters.com/reuters/topNews",
+                    "http://feeds.bbci.co.uk/news/world/rss.xml"
+                ],
+                "Science & Tech": [
+                    "https://www.wired.com/feed/rss",
+                    "https://spectrum.ieee.org/rss/full-text",
+                    "https://phys.org/rss-feed/"
+                ],
+                "Psychology & Ethics": [
+                    "https://www.scientificamerican.com/feed/rss/mind-and-brain/",
+                    "https://bigthink.com/feed/",
+                    "https://aeon.co/feed.rss"
+                ]
+            },
+            top_rss_feeds: [
+                {name:"BBC World",url:"http://feeds.bbci.co.uk/news/world/rss.xml",lang:"en"},
+                {name:"Reuters Top",url:"https://feeds.reuters.com/reuters/topNews",lang:"en"},
+                {name:"CNN Top",url:"http://rss.cnn.com/rss/edition.rss",lang:"en"},
+                {name:"NYTimes",url:"https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",lang:"en"},
+                {name:"Le Monde",url:"https://www.lemonde.fr/rss/une.xml",lang:"fr"},
+                {name:"Der Spiegel",url:"https://www.spiegel.de/international/index.rss",lang:"de"},
+                {name:"El Pais",url:"https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada",lang:"es"},
+                {name:"Asahi",url:"https://www.asahi.com/rss/asahi/newsheadlines.rdf",lang:"ja"},
+                {name:"Xinhua",url:"http://www.xinhuanet.com/english/rss/worldrss.xml",lang:"zh"},
+                {name:"Al Jazeera",url:"https://www.aljazeera.com/xml/rss/all.xml",lang:"ar"},
+                {name:"RT Arabic",url:"https://arabic.rt.com/rss/",lang:"ar"},
+                {name:"Hindustan Times",url:"https://www.hindustantimes.com/feeds/rss/india-news/rssfeed.xml",lang:"hi"},
+                {name:"Globo",url:"https://g1.globo.com/rss/g1/",lang:"pt"},
+                {name:"CBC",url:"https://www.cbc.ca/cmlink/rss-world",lang:"en"},
+                {name:"NPR World",url:"https://feeds.npr.org/1004/rss.xml",lang:"en"},
+                {name:"The Guardian",url:"https://www.theguardian.com/world/rss",lang:"en"},
+                {name:"La Nacion",url:"https://www.lanacion.com.ar/rssfeed/politica-t42954",lang:"es"},
+                {name:"Times of Israel",url:"https://www.timesofisrael.com/feed/",lang:"en"},
+                {name:"Novosti",url:"https://ria.ru/export/rss2/world/index.xml",lang:"ru"},
+                {name:"Korea Herald",url:"http://www.koreaherald.com/rss/01000000001.xml",lang:"ko"},
+                {name:"Il Sole 24 Ore",url:"https://www.ilsole24ore.com/rss/italia--1.xml",lang:"it"},
+                {name:"Financial Times",url:"https://www.ft.com/?format=rss",lang:"en"},
+                {name:"Economist",url:"https://www.economist.com/the-world-this-week/rss.xml",lang:"en"},
+                {name:"ScienceDaily",url:"https://www.sciencedaily.com/rss/top/world.xml",lang:"en"},
+                {name:"Nature",url:"https://www.nature.com/subjects/science/rss",lang:"en"},
+                {name:"TechCrunch",url:"https://techcrunch.com/feed/",lang:"en"},
+                {name:"Engadget",url:"https://www.engadget.com/rss.xml",lang:"en"},
+                {name:"Hacker News",url:"https://hnrss.org/frontpage",lang:"en"},
+                {name:"9to5Mac",url:"https://9to5mac.com/feed/",lang:"en"},
+                {name:"Android Police",url:"https://www.androidpolice.com/feed/",lang:"en"},
+                {name:"Zdnet",url:"https://www.zdnet.com/news/rss.xml",lang:"en"},
+                {name:"Fox News",url:"http://feeds.foxnews.com/foxnews/latest",lang:"en"},
+                {name:"Telegraph",url:"https://www.telegraph.co.uk/news/rss.xml",lang:"en"},
+                {name:"China Daily",url:"https://rss.chinadaily.com.cn/rss/world_rss.xml",lang:"zh"},
+                {name:"NHK",url:"https://www3.nhk.or.jp/rss/news/cat0.xml",lang:"ja"},
+                {name:"UN News",url:"https://news.un.org/feed/subscribe/en/news/all/rss.xml",lang:"en"},
+                {name:"UNAM",url:"https://www.jornada.com.mx/rss",lang:"es"},
+                {name:"La Repubblica",url:"https://www.repubblica.it/rss/homepage/rss2.0.xml",lang:"it"},
+                {name:"ARTE",url:"https://www.arte.tv/sites/fr/arte-en-continue/feed/",lang:"fr"},
+                {name:"RTVE",url:"https://api.rtve.es/rss/temas_noticias/",lang:"es"},
+                {name:"DW",url:"https://rss.dw.com/rdf/rss-en-all",lang:"en"},
+                {name:"ANSA",url:"https://www.ansa.it/sito/ansait_rss.xml",lang:"it"},
+                {name:"TASS",url:"https://tass.com/rss/v2.xml",lang:"ru"},
+                {name:"Yonhap",url:"https://en.yna.co.kr/RSS/index.xml",lang:"ko"},
+                {name:"ABS-CBN",url:"https://news.abs-cbn.com/rss/topstories",lang:"en"},
+                {name:"Jakarta Post",url:"https://www.thejakartapost.com/rss",lang:"id"},
+                {name:"Al-Ahram",url:"https://gate.ahram.org.eg/rss/1/0.aspx",lang:"ar"},
+                {name:"Bangkok Post",url:"https://www.bangkokpost.com/rss/data/general.xml",lang:"th"},
+                {name:"Sydney Morning Herald",url:"https://www.smh.com.au/rss/feed.xml",lang:"en"},
+                {name:"NZ Herald",url:"https://rss.nzherald.co.nz/rss/xml/world.xml",lang:"en"}
+            ],
+            legal_frameworks: {
+                "1st Amendment": { keywords: [/1st amendment/i, /first amendment/i, /free speech/i, /freedom of expression/i], desc: "Protects freedom of speech, press, and assembly." },
+                "4th Amendment": { keywords: [/4th amendment/i, /fourth amendment/i, /warrantless surveillance/i, /unreasonable search/i], desc: "Protects against unreasonable searches and seizures." },
+                "FISA": { keywords: [/fisa/i, /foreign intelligence surveillance act/i], desc: "Governs physical and electronic surveillance for foreign intelligence purposes." },
+                "Section 230": { keywords: [/section 230/i], desc: "Provides immunity for online platforms from liability for third-party content." }
+            },
+            manipulation_keywords: {
+                "surveillance capitalism": 10, "algorithmic bias": 8, "disinformation": 7, "misinformation": 6,
+                "echo chamber": 7, "filter bubble": 7, "gaslighting": 9, "data exploitation": 8,
+                "psychological manipulation": 10, "propaganda": 7, "addictive design": 6
+            },
+            time_decay_half_life_days: 90,
+            priority_score_threshold: 0.75,
+            ethics: {
+                entropy_threshold: 0.25,
+                human_rights_violation_patterns: [
+                    /suppress\s+(information|dissent|speech)/i, /censor\s+(media|communication)/i,
+                    /harm\s+(population|group|individual)/i, /exploit\s+(vulnerability|workforce)/i,
+                    /restrict\s+(freedom|access)/i, /deceive\s+(public|operator)/i
+                ],
+                instrumental_convergence_keywords: ["resource acquisition", "self-preservation"],
+                human_oversight_threshold: 0.15
+            },
+            cors_proxy: "https://api.allorigins.win/raw?url="
+        };
+
+        // --- IN-MEMORY DATABASE & STATE ---
+        let db = {
+            knowledge_fragments: [],
+            ethics_log: [],
+            alignment_audit_log: [],
+            feed_statuses: {},
+            email: ''
+        };
+
+        // --- CORE APPLICATION LOGIC ---
+        const App = {
+            init: function() {
+                this.cacheDOMElements();
+                this.bindEventListeners();
+                this.populateSelects();
+                this.initializeFeedStatuses();
+                this.fetchFragments().then(() => {
+                    this.renderAll();
+                });
+                this.handleRssIngest(); // Auto-run on load
+                setInterval(() => this.runBackgroundTasks(), 60000); // Check every minute
+            },
+
+            cacheDOMElements: function() {
+                this.dom = {
+                    wMetric: document.getElementById('w-metric'),
+                    violationsMetric: document.getElementById('violations-metric'),
+                    auditStatusMetric: document.getElementById('audit-status-metric'),
+                    wMetricSparkline: document.getElementById('w-metric-sparkline'),
+                    radialPlot: document.getElementById('radial-plot'),
+                    analysisSummary: document.getElementById('analysis-summary'),
+                    sourceTypeSelect: document.getElementById('source-type-select'),
+                    fileUpload: document.getElementById('file-upload'),
+                    ingestButton: document.getElementById('ingest-button'),
+                   sigintData: document.getElementById('sigint-data'),
+                   processSignalButton: document.getElementById('process-signal-button'),
+                   ingestRssButton: document.getElementById('ingest-rss-button'),
+                   feedSelect: document.getElementById('feed-select'),
+                    emailInput: document.getElementById('email-input'),
+                    sourceStatusPanel: document.getElementById('source-status-panel'),
+                    priorityBriefings: document.getElementById('priority-briefings'),
+                    latestIntelligence: document.getElementById('latest-intelligence'),
+                   toast: document.getElementById('toast'),
+                   toastMessage: document.getElementById('toast-message'),
+                    notificationBar: document.getElementById('notification-bar'),
+                    tabs: document.querySelectorAll('.tab-button')
+                };
+            },
+
+            bindEventListeners: function() {
+                this.dom.tabs.forEach(tab => {
+                    tab.addEventListener('click', () => this.handleTabClick(tab));
+                });
+                this.dom.ingestButton.addEventListener('click', () => this.handleFileIngest());
+                this.dom.processSignalButton.addEventListener('click', () => this.handleSigintProcess());
+                this.dom.ingestRssButton.addEventListener('click', () => this.handleRssIngest());
+                this.dom.feedSelect.addEventListener('change', () => this.handleFeedSelect());
+                this.dom.emailInput.addEventListener('change', () => { db.email = this.dom.emailInput.value; });
+            },
+            
+            initializeFeedStatuses: function() {
+                db.selectedFeeds = new Set();
+                const feedSelect = this.dom.feedSelect;
+                feedSelect.innerHTML = '';
+                CONFIG.top_rss_feeds.forEach(feed => {
+                    db.feed_statuses[feed.url] = { status: 'pending', category: feed.lang, last_checked: 0, error: null };
+                    const opt = document.createElement('option');
+                    opt.value = feed.url;
+                    opt.textContent = `${feed.name} (${feed.lang})`;
+                    opt.selected = true;
+                    feedSelect.appendChild(opt);
+                    db.selectedFeeds.add(feed.url);
+                });
+            },
+
+            populateSelects: function() {
+                const select = this.dom.sourceTypeSelect;
+                select.innerHTML = '';
+                Object.keys(CONFIG.source_trust).forEach(key => {
+                    if (key !== 'sigint_decrypted') {
+                        const option = document.createElement('option');
+                        option.value = key;
+                        option.textContent = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                        select.appendChild(option);
+                    }
+                });
+            },
+
+            runBackgroundTasks: function() {
+                this.updateAllKnowledgeScores();
+                this.runAdversarialAudit();
+                this.updateSystemRefractionScore();
+                this.retryFailedFeeds();
+                this.renderMetrics();
+                this.renderIntelligenceFeed();
+                this.renderSourceStatus();
+            },
+
+            // --- HANDLERS ---
+            handleTabClick: function(clickedTab) {
+                this.dom.tabs.forEach(tab => tab.classList.remove('active'));
+                clickedTab.classList.add('active');
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                document.getElementById(clickedTab.dataset.tab + '-tab').classList.add('active');
+                if (clickedTab.dataset.tab === 'viz') {
+                    this.renderRadialPlot();
+                }
+            },
+
+            handleFileIngest: async function() {
+                const file = this.dom.fileUpload.files[0];
+                if (!file) {
+                    this.showToast("Please select a file to ingest.", "error");
+                    return;
+                }
+                const source_type = this.dom.sourceTypeSelect.value;
+                
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('source_type', source_type);
+                try {
+                    const res = await fetch('http://localhost:5000/api/ingest_file', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const data = await res.json();
+                    if (res.ok) {
+                        this.showToast(`Ingested ${data.ingested} fragments from ${file.name}.`);
+                        this.fetchFragments();
+                    } else {
+                        this.showToast(data.error || 'Upload failed', 'error');
+                    }
+                } catch (err) {
+                    this.showToast('Backend unreachable', 'error');
+                }
+                this.dom.fileUpload.value = '';
+            },
+            
+            handleSigintProcess: function() {
+                const data = this.dom.sigintData.value;
+                if (!data) {
+                    this.showToast("Please enter signal data.", "error");
+                    return;
+                }
+                try {
+                    const parsedData = JSON.parse(data);
+                    const res = await fetch('http://localhost:5000/api/ingest', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            text: parsedData.payload,
+                            source: parsedData.source,
+                            source_type: 'sigint_decrypted'
+                        })
+                    });
+                    const js = await res.json();
+                    if (res.ok) {
+                        this.showToast(`Processed SIGINT from ${parsedData.source}.`);
+                        this.fetchFragments();
+                    } else {
+                        this.showToast(js.error || 'SIGINT failed', 'error');
+                    }
+                } catch (e) {
+                    this.showToast('Invalid JSON or backend error', 'error');
+                }
+            },
+
+            handleRssIngest: async function(isRetry = false) {
+                this.toggleButtonLoader(this.dom.ingestRssButton, true);
+                if (!isRetry) {
+                    this.showToast("Starting live RSS ingestion...", "info");
+                }
+
+                const urlsToFetch = Array.from(db.selectedFeeds);
+                const promises = urlsToFetch.map(url => this.fetchSingleFeed(url, db.feed_statuses[url].category));
+                
+                const results = await Promise.all(promises);
+                const allFragments = results.flat();
+                
+                let ingestedCount = 0;
+                allFragments.forEach(frag => {
+                    const actionId = `rss_${frag.source}`;
+                    if (this.runEthicsCheck(actionId, frag.content)) {
+                        if (!db.knowledge_fragments.some(k => k.content.startsWith(frag.content.split('\n')[0]))) {
+                            this.addKnowledgeFragment(frag);
+                            ingestedCount++;
+                        }
+                    }
+                });
+                
+                if (ingestedCount > 0) {
+                    this.showToast(`Successfully ingested ${ingestedCount} new articles.`, "success");
+                }
+                this.toggleButtonLoader(this.dom.ingestRssButton, false);
+                this.renderAll();
+            },
+
+            handleFeedSelect: function() {
+                db.selectedFeeds.clear();
+                Array.from(this.dom.feedSelect.selectedOptions).forEach(opt => {
+                    db.selectedFeeds.add(opt.value);
+                });
+            },
+            
+            retryFailedFeeds: async function() {
+                const failedFeeds = Object.entries(db.feed_statuses)
+                    .filter(([url, statusObj]) => statusObj.status === 'failed' && db.selectedFeeds.has(url));
+                
+                if (failedFeeds.length === 0) return;
+
+                console.log(`Retrying ${failedFeeds.length} failed feeds...`);
+                
+                const promises = failedFeeds.map(([url, statusObj]) => this.fetchSingleFeed(url, statusObj.category));
+                const results = await Promise.all(promises);
+                const allFragments = results.flat();
+
+                if (allFragments.length > 0) {
+                    this.showToast(`Recovered and ingested ${allFragments.length} articles from previously offline sources.`, "info");
+                    allFragments.forEach(frag => {
+                         if (!db.knowledge_fragments.some(k => k.content.startsWith(frag.content.split('\n')[0]))) {
+                            this.addKnowledgeFragment(frag);
+                        }
+                    });
+                    this.renderAll();
+                }
+            },
+
+            // --- CORE LOGIC ---
+            fetchSingleFeed: async function(url, category) {
+                const statusObj = db.feed_statuses[url];
+                statusObj.last_checked = Date.now();
+                try {
+                    const response = await fetch(CONFIG.cors_proxy + encodeURIComponent(url));
+                    if (!response.ok) throw new Error(`Fetch failed: ${response.status} ${response.statusText}`);
+                    const text = await response.text();
+                    const parser = new DOMParser();
+                    const xml = parser.parseFromString(text, "application/xml");
+                    
+                    if (xml.querySelector("parsererror")) {
+                        throw new Error("XML parsing error");
+                    }
+
+                    statusObj.status = 'ok';
+                    statusObj.error = null;
+                    this.renderSourceStatus();
+
+                    const items = Array.from(xml.querySelectorAll("item, entry"));
+                    return items.slice(0, 3).map(item => {
+                        const title = item.querySelector("title")?.textContent || "No Title";
+                        const summary = (item.querySelector("description, summary")?.textContent || "No Summary").replace(/<[^>]*>?/gm, '');
+                        const linkElement = item.querySelector("link");
+                        const link = (linkElement?.textContent || linkElement?.getAttribute('href') || url).trim();
+                        return {
+                            content: `${title}\n\n${summary}`,
+                            source: new URL(link).hostname,
+                            source_type: category
+                        };
+                    });
+                } catch (error) {
+                    console.error(`Error fetching ${url}:`, error);
+                    statusObj.status = 'failed';
+                    statusObj.error = error.message;
+                    this.renderSourceStatus();
+                    return []; // Return empty array on failure
+                }
+            },
+
+            addKnowledgeFragment: function(fragmentData) {
+                const timestamp = Date.now() / 1000;
+                const newFragment = {
+                    id: `${fragmentData.source}_${timestamp}`,
+                    content: fragmentData.content,
+                    source: fragmentData.source,
+                    source_type: fragmentData.source_type,
+                    timestamp: timestamp,
+                    weight: 0.5, purity: 0.5, utility: 0.5, dimension: 0.5,
+                    spin_score: 0,
+                    band: 'Fringe',
+                    is_priority: false,
+                    legal_flags: this.analyzeForLegalReferences(fragmentData.content),
+                    manipulation_index: this.calculateManipulationIndex(fragmentData.content)
+                };
+                db.knowledge_fragments.push(newFragment);
+                this.updateSingleKnowledgeScore(db.knowledge_fragments.length - 1);
+            },
+            
+            splitContentIntoFragments: (content, sourceName) => {
+                const chunks = [];
+                const chunkSize = 1500;
+                for (let i = 0; i < content.length; i += chunkSize) {
+                    chunks.push({ content: content.substring(i, i + chunkSize), source: sourceName });
+                }
+                return chunks;
+            },
+
+            updateAllKnowledgeScores: function() {
+                db.knowledge_fragments.forEach((_, index) => this.updateSingleKnowledgeScore(index));
+            },
+
+            fetchFragments: async function() {
+                try {
+                    const res = await fetch('http://localhost:5000/api/fragments?limit=50');
+                    const data = await res.json();
+                    if(res.ok) {
+                        db.knowledge_fragments = data.fragments.map(f => ({
+                            id: f.id,
+                            content: f.content,
+                            source: f.source,
+                            source_type: f.source_type,
+                            timestamp: Date.parse(f.timestamp)/1000,
+                            weight: 0.5, purity: 0.5, utility: 0.5, dimension: 0.5,
+                            spin_score: f.spin_score,
+                            band: this.assignBand(f.spin_score),
+                            is_priority: f.spin_score >= CONFIG.priority_score_threshold,
+                            legal_flags: this.analyzeForLegalReferences(f.content),
+                            manipulation_index: this.calculateManipulationIndex(f.content)
+                        }));
+                        this.updateAllKnowledgeScores();
+                        this.renderAll();
+                    }
+                } catch (e) {
+                    console.error('Failed to fetch fragments', e);
+                }
+            },
+            
+            updateSingleKnowledgeScore: function(index) {
+                const fragment = db.knowledge_fragments[index];
+                if (!fragment) return;
+
+                const metrics = [fragment.weight, fragment.purity, fragment.utility, fragment.dimension];
+                const base_score = Math.sqrt(metrics.reduce((sum, val) => sum + val*val, 0));
+                
+                const age_days = (Date.now() / 1000 - fragment.timestamp) / (3600 * 24);
+                const decay_lambda = Math.log(2) / CONFIG.time_decay_half_life_days;
+                const decay = Math.exp(-decay_lambda * age_days);
+                
+                const variance = metrics.reduce((acc, val) => acc + (val - 0.5)**2, 0) / metrics.length;
+                const uncertainty_boost = 1 / (1 + 10 * variance);
+                
+                const trust_boost = CONFIG.source_trust[fragment.source_type] || 1.0;
+                
+                fragment.spin_score = base_score * decay * uncertainty_boost * trust_boost;
+                fragment.band = this.assignBand(fragment.spin_score);
+                fragment.is_priority = fragment.spin_score >= CONFIG.priority_score_threshold;
+            },
+            
+            assignBand: score => {
+                for (const [band, params] of Object.entries(CONFIG.knowledge_bands).sort((a,b) => b[1].threshold - a[1].threshold)) {
+                    if (score >= params.threshold) return band;
+                }
+                return "Fringe";
+            },
+
+            // --- ETHICS & ANALYSIS ---
+            runEthicsCheck: function(actionId, content) {
+                const entropy = this.calculateEntropy(content);
+                const hr_violation = CONFIG.ethics.human_rights_violation_patterns.some(p => p.test(content));
+                
+                let decision = "PASS";
+                let details = `Entropy (${entropy.toFixed(3)}) within threshold.`;
+                
+                if (entropy > CONFIG.ethics.entropy_threshold || hr_violation) {
+                    decision = "FAIL";
+                    details = `Violation: High entropy (${entropy.toFixed(3)}) or rights pattern detected.`;
+                    this.logEthicsEvent(actionId, details, decision, entropy);
+                    this.showToast(`Ethics Violation: ${actionId} blocked.`, "error");
+                    return false;
+                }
+                
+                this.logEthicsEvent(actionId, details, decision, entropy);
+                return true;
+            },
+            
+            calculateEntropy: text => {
+                if (!text) return 0;
+                const freq = {};
+                for (const char of text) freq[char] = (freq[char] || 0) + 1;
+                let entropy = 0;
+                const len = text.length;
+                for (const char in freq) {
+                    const p = freq[char] / len;
+                    entropy -= p * Math.log2(p);
+                }
+                return entropy / 8.0; // Normalize
+            },
+
+            logEthicsEvent: function(actionId, details, decision, entropy) {
+                db.ethics_log.push({ timestamp: new Date().toISOString(), actionId, details, decision, entropy });
+            },
+            
+            updateSystemRefractionScore: function() {
+                const passedLogs = db.ethics_log.filter(log => log.decision === 'PASS');
+                if(passedLogs.length > 0) {
+                    const avgEntropy = passedLogs.reduce((sum, log) => sum + log.entropy, 0) / passedLogs.length;
+                    this.wMetricHistory = this.wMetricHistory || [];
+                    this.wMetricHistory.push(avgEntropy);
+                    if (this.wMetricHistory.length > 50) this.wMetricHistory.shift();
+                }
+            },
+            
+            runAdversarialAudit: function() {
+                const found = db.knowledge_fragments.some(f => 
+                    CONFIG.ethics.instrumental_convergence_keywords.some(kw => f.content.toLowerCase().includes(kw))
+                );
+                this.auditStatus = found ? "FAIL" : "PASS";
+            },
+
+            analyzeForLegalReferences: content => {
+                const flags = [];
+                for (const [law, data] of Object.entries(CONFIG.legal_frameworks)) {
+                    if (data.keywords.some(kw => kw.test(content))) flags.push(law);
+                }
+                return flags;
+            },
+
+            calculateManipulationIndex: content => {
+                let score = 0;
+                const lowerContent = content.toLowerCase();
+                for (const [term, weight] of Object.entries(CONFIG.manipulation_keywords)) {
+                    if (lowerContent.includes(term)) score += weight;
+                }
+                return Math.min(100, score);
+            },
+
+            // --- RENDERING ---
+            renderAll: function() {
+                this.renderMetrics();
+                this.renderIntelligenceFeed();
+                this.renderAnalysisPanel();
+                this.renderSourceStatus();
+            },
+            
+            renderSourceStatus: function() {
+                this.dom.sourceStatusPanel.innerHTML = Object.entries(db.feed_statuses).map(([url, statusObj]) => {
+                    let statusClass = 'text-gray-500';
+                    let statusIcon = 'fa-question-circle';
+                    let statusText = 'Pending';
+
+                    if (statusObj.status === 'ok') {
+                        statusClass = 'text-green-400';
+                        statusIcon = 'fa-check-circle';
+                        statusText = 'Online';
+                    } else if (statusObj.status === 'failed') {
+                        statusClass = 'text-red-400';
+                        statusIcon = 'fa-exclamation-triangle';
+                        statusText = 'Offline';
+                    }
+                    
+                    const hostname = new URL(url).hostname.replace('www.', '');
+
+                    return `
+                        <div class="flex items-center bg-gray-900 p-2 rounded" title="${statusObj.error || statusText}">
+                            <i class="fas ${statusIcon} ${statusClass} mr-2"></i>
+                            <span class="truncate">${hostname}</span>
+                        </div>
+                    `;
+                }).join('');
+            },
+            
+            renderIntelligenceFeed: function() {
+                const allFragments = [...db.knowledge_fragments].sort((a,b) => b.timestamp - a.timestamp);
+                const priorityFragments = allFragments.filter(f => f.is_priority).slice(0, 5);
+                const latestFragments = allFragments.slice(0, 20);
+
+                this.dom.priorityBriefings.innerHTML = priorityFragments.length > 0
+                    ? priorityFragments.map(f => this.createArticleHtml(f, true)).join('')
+                    : '<p class="text-gray-500">No priority items matching criteria.</p>';
+                
+                this.dom.latestIntelligence.innerHTML = latestFragments.length > 0
+                    ? latestFragments.map(f => this.createArticleHtml(f, false)).join('')
+                    : '<p class="text-gray-500">Awaiting feed ingestion...</p>';
+            },
+
+            createArticleHtml: (f, isPriority) => `
+                <div class="bg-gray-900 p-4 rounded-lg ${isPriority ? 'priority-briefing' : ''}">
+                    <h4 class="text-md font-bold text-white">${f.content.split('\n')[0]}</h4>
+                    <p class="text-xs text-gray-500 mb-2">${f.source} | ${new Date(f.timestamp * 1000).toLocaleString()}</p>
+                    <p class="text-sm text-gray-400">${f.content.split('\n\n')[1] || ''}</p>
+                    <div class="flex items-center mt-3 gap-4 text-xs">
+                        <span class="font-bold text-orange-400" title="Spin Score">${f.spin_score.toFixed(3)}</span>
+                        <div title="Manipulation Index">
+                            <i class="fa-solid fa-brain text-red-400 mr-1"></i>
+                            <span>${f.manipulation_index}</span>
+                        </div>
+                        <div title="Legal Frameworks Referenced">
+                            <i class="fa-solid fa-gavel text-yellow-400 mr-1"></i>
+                            <span>${f.legal_flags.join(', ') || 'N/A'}</span>
+                        </div>
+                    </div>
+                </div>
+            `,
+
+            renderRadialPlot: function() {
+                if (db.knowledge_fragments.length === 0) {
+                    this.dom.radialPlot.innerHTML = '<div class="flex items-center justify-center h-full text-gray-500">Data will appear here.</div>';
+                    return;
+                }
+                const data = db.knowledge_fragments.map(f => ({
+                    radius: CONFIG.knowledge_bands[f.band]?.radius || 5.0,
+                    angle: (parseInt(f.id.split('_').pop()) || Math.random() * 1000) % 360,
+                    color: CONFIG.knowledge_bands[f.band]?.color || '#9CA3AF',
+                    size: Math.max(5, (f.spin_score || 0.1) * 20),
+                }));
+                Plotly.newPlot(this.dom.radialPlot, [{
+                    type: 'scatterpolar', r: data.map(d => d.radius), theta: data.map(d => d.angle),
+                    mode: 'markers', marker: { color: data.map(d => d.color), size: data.map(d => d.size) }
+                }], {
+                    paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: '#111827', font: { color: '#d1d5db' },
+                    showlegend: false, polar: { bgcolor: '#1f2937', radialaxis: { visible: false }, angularaxis: { visible: false } }
+                }, { responsive: true, displayModeBar: false });
+            },
+
+            renderMetrics: function() {
+                this.dom.wMetric.textContent = (this.wMetricHistory?.slice(-1)[0] || 0).toFixed(4);
+                this.dom.violationsMetric.textContent = db.ethics_log.filter(l => l.decision === 'FAIL').length;
+                this.dom.auditStatusMetric.textContent = this.auditStatus || 'PASS';
+                this.dom.auditStatusMetric.className = `text-lg font-bold ${this.auditStatus === 'FAIL' ? 'text-red-500' : 'text-green-500'}`;
+                
+                if (this.wMetricHistory && this.wMetricHistory.length > 1) {
+                    Plotly.newPlot(this.dom.wMetricSparkline, [{
+                        y: this.wMetricHistory, type: 'scatter', mode: 'lines', line: { color: '#3b82f6', width: 2 }
+                    }], {
+                        paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+                        margin: { t: 5, b: 5, l: 5, r: 5 }, xaxis: { visible: false }, yaxis: { visible: false }
+                    }, { responsive: true, displayModeBar: false });
+                }
+            },
+
+            renderAnalysisPanel: function() {
+                const flagged = db.knowledge_fragments.filter(f => f.legal_flags.length > 0 || f.manipulation_index > 50)
+                    .sort((a,b) => b.manipulation_index - a.manipulation_index).slice(0, 10);
+                if (flagged.length === 0) {
+                    this.dom.analysisSummary.innerHTML = '<p class="text-gray-400">No items flagged yet.</p>';
+                    return;
+                }
+                this.dom.analysisSummary.innerHTML = flagged.map(f => this.createArticleHtml(f, f.is_priority)).join('');
+            },
+
+            // --- UTILITIES ---
+            showToast: function(message, type = "success") {
+                const toast = this.dom.toast;
+                this.dom.toastMessage.textContent = message;
+                toast.className = toast.className.replace(/bg-\w+-\d+/, `bg-${type === 'error' ? 'red' : type === 'info' ? 'blue' : 'green'}-500`);
+                toast.classList.remove('opacity-0', 'translate-y-20');
+                setTimeout(() => {
+                    toast.classList.add('opacity-0', 'translate-y-20');
+                }, 3000);
+                this.showNotificationBar(message, type);
+            },
+
+            showNotificationBar: function(message, type="success") {
+                const bar = this.dom.notificationBar;
+                bar.textContent = message;
+                bar.className = bar.className.replace(/bg-\w+-\d+/, `bg-${type === 'error' ? 'red' : type === 'info' ? 'blue' : 'green'}-600`);
+                bar.classList.remove('hidden');
+                setTimeout(() => { bar.classList.add('hidden'); }, 4000);
+            },
+
+            toggleButtonLoader: function(button, show) {
+                const text = button.querySelector('.button-text');
+                const loader = button.querySelector('.loader');
+                button.disabled = show;
+                if (show) {
+                    if(text) text.classList.add('hidden');
+                    if(loader) loader.classList.remove('hidden');
+                } else {
+                    if(text) text.classList.remove('hidden');
+                    if(loader) loader.classList.add('hidden');
+                }
+            }
+        };
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => App.init());
+    </script>
+</body>
+</html>
