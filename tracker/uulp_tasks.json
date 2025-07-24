@@ -1,0 +1,46 @@
+{
+    "tasks": [
+        {
+            "id": "T001",
+            "priority": 1,
+            "status": "open",
+            "description": "Fix and expand README"
+        },
+        {
+            "id": "T002",
+            "priority": 2,
+            "status": "open",
+            "description": "Add automated tests using pytest"
+        },
+        {
+            "id": "T003",
+            "priority": 3,
+            "status": "open",
+            "description": "Add packaging configuration (pyproject.toml)"
+        },
+        {
+            "id": "T004",
+            "priority": 4,
+            "status": "open",
+            "description": "Set up CI workflow"
+        },
+        {
+            "id": "T005",
+            "priority": 5,
+            "status": "done",
+            "description": "Enhance example scripts"
+        },
+        {
+            "id": "T006",
+            "priority": 6,
+            "status": "open",
+            "description": "Document modules and add Phoenix Project summary"
+        },
+        {
+            "id": "T007",
+            "priority": 7,
+            "status": "open",
+            "description": "Build internal UULP interpreter for module communication"
+        }
+    ]
+}
