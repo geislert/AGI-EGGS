@@ -85,3 +85,38 @@ You should see output similar to:
 ```
 
 This demonstrates simple information flow among multiple devices.
+
+## Civil liberties simulation
+
+`civil_liberties_simulation.py` starts three nodes that model a citizen, local
+law enforcement and a news outlet. The script demonstrates how messages can be
+exchanged and how a simple threat matrix might track constitutional and civil
+liberties issues.
+
+Run it with:
+
+```bash
+python3 civil_liberties_simulation.py
+```
+
+## Notifications example
+
+`notifications_example.py` shows how to generate an RSS feed of events and optionally send email alerts. Configure SMTP settings in the script or run it without email to just create `notifications.xml`.
+
+Run it with:
+
+```bash
+python3 notifications_example.py
+```
+
+The RSS file will be written to `notifications.xml` in the repository directory.
+
+## EchoSeed HALO demo
+
+`halo_mesh_example.py` loads a small mesh configuration from `EchoSeed_HALO_RESTORED/aether/os/init/mesh_network_config.yaml` and starts nodes for each role defined there. It demonstrates how the HALO configuration can work with the AGI‑EGGS networking layer.
+
+Run it with:
+
+```bash
+python3 halo_mesh_example.py
+```
