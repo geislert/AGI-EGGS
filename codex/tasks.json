@@ -1,0 +1,34 @@
+{
+    "tasks": [
+        {
+            "id": "CX001",
+            "priority": 1,
+            "status": "done",
+            "description": "Summarize repository structure for quick rebuild"
+        },
+        {
+            "id": "CX002",
+            "priority": 2,
+            "status": "in_progress",
+            "description": "Track external user instructions separately"
+        },
+        {
+            "id": "CX003",
+            "priority": 3,
+            "status": "open",
+            "description": "Maintain codex notes file for repository rebuild context"
+        },
+        {
+            "id": "CX004",
+            "priority": 4,
+            "status": "open",
+            "description": "Run update_structure.py after each commit"
+        },
+        {
+            "id": "CX005",
+            "priority": 5,
+            "status": "open",
+            "description": "Maintain codex journal and structure history"
+        }
+    ]
+}
