@@ -1,0 +1,10 @@
+{
+  "notes": "Agent-specific tasks for repository maintenance and improvements",
+  "tasks": [
+    {"id": "AT1", "status": "open", "description": "Maintain structure snapshots after each commit"},
+    {"id": "AT2", "status": "open", "description": "Ensure README diagrams and CONTRIBUTING guide added"},
+    {"id": "AT3", "status": "open", "description": "Add encryption option to network connections"},
+    {"id": "AT4", "status": "open", "description": "Command line option for message store path"},
+    {"id": "AT5", "status": "open", "description": "Create tutorial walkthrough"}
+  ]
+}
